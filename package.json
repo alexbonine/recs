@@ -1,0 +1,30 @@
+{
+  "name": "recs",
+  "version": "0.0.1",
+  "description": "Recs site for Spotify",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexbonine/recs.git"
+  },
+  "keywords": [
+    "spotify",
+    "recs",
+    "recommendations",
+    "react",
+    "node"
+  ],
+  "author": "Alex Bonine",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alexbonine/recs/issues"
+  },
+  "homepage": "https://github.com/alexbonine/recs#readme",
+  "dependencies": {
+    "express": "^4.15.3"
+  }
+}
