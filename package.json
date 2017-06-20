@@ -4,7 +4,8 @@
   "description": "Recs site for Spotify",
   "main": "index.js",
   "scripts": {
-    "build:client": "browserify client/index.js -o client/bundle.js -d",
+    "build:client": "browserify client/index.js -o public/bundle.js -d",
+    "watch:client": "watchify client/index.js -v -o public/bundle.js -d",
     "start": "node server/index.js",
     "start:restart": "nodemon server/index.js",
     "start:debug": "node --inspect --debug-brk server/index.js",
@@ -28,11 +29,15 @@
   },
   "homepage": "https://github.com/alexbonine/recs#readme",
   "dependencies": {
+    "body-parser": "^1.17.2",
     "cookie-parser": "^1.4.3",
     "express": "^4.15.3",
-    "spotify-web-api-node": "^2.4.0"
+    "promise-polyfill": "^6.0.2",
+    "spotify-web-api-node": "^2.4.0",
+    "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
-    "browserify": "^14.4.0"
+    "browserify": "^14.4.0",
+    "watchify": "^3.9.0"
   }
 }

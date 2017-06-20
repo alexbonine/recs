@@ -3,13 +3,19 @@ const path = require('path');
 const fs = require('fs');
 const https = require('https');
 const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 const key = fs.readFileSync(path.join(__dirname, 'certs', 'recs.alexbonine.com.key'));
 const cert = fs.readFileSync(path.join(__dirname, 'certs', 'recs.alexbonine.com.crt'));
 const { authorizeUrl, privateState, setTokens } = require('./spotify.js');
+const api = require('./api/router.js');
 
 const app = express();
 app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.set('port', (process.env.PORT || 5000));
+
+app.use('/api', api);
 
 app.get('/callback', (req, res) => {
   console.log('callback', req.query)
@@ -22,6 +28,8 @@ app.get('/callback', (req, res) => {
     res.sendFile(path.join(__dirname, '../', '/client/callback.html'));
   }
 });
+
+app.use(express.static(path.join(__dirname, '../', '/public')));
 
 app.get('*', (req, res) => {
   let data = fs.readFileSync(path.join(__dirname, '../', '/client/index.html'));
