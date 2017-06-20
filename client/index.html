@@ -6,5 +6,12 @@
 </head>
 <body>
   <div>Test HTML</div>
+  <button onclick="window.open(window.spotifyAuthUrl)">Login</button>
+  <script>
+    var date = new Date();
+    document.cookie = 'recs.alexbonine.com_spotifyAuthUrl=\'set-url\';expires=' +
+      date.setTime(date.getTime() + 3600) + ';path=/';
+    window.spotifyAuthUrl = 'set-url';
+  </script>
 </body>
 </html>

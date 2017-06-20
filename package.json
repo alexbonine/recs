@@ -4,7 +4,10 @@
   "description": "Recs site for Spotify",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "build:client": "browserify client/index.js -o client/bundle.js -d",
+    "start": "node server/index.js",
+    "start:restart": "nodemon server/index.js",
+    "start:debug": "node --inspect --debug-brk server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -25,6 +28,11 @@
   },
   "homepage": "https://github.com/alexbonine/recs#readme",
   "dependencies": {
-    "express": "^4.15.3"
+    "cookie-parser": "^1.4.3",
+    "express": "^4.15.3",
+    "spotify-web-api-node": "^2.4.0"
+  },
+  "devDependencies": {
+    "browserify": "^14.4.0"
   }
 }
