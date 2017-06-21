@@ -3,10 +3,22 @@
 <head>
   <title>Index</title>
   <meta charset="utf-8">
+  <style>
+    .login-status { display: none; }
+    .show { display: block; }
+  </style>
 </head>
 <body>
-  <div>Test HTML</div>
-  <button onclick='window.openSpotifyPopup()'>Login</button>
+  <div class='login-status login-needed'>
+    <h2>Need to Login</h2>
+    <button onclick='window.openSpotifyPopup()'>Login</button>
+  </div>
+  <div class='login-status login-checking show'>
+    <h2>Checking Auth</h2>
+  </div>
+  <div class='login-status login-good'>
+    <h2>Logged In</h2>
+  </div>
   <script>
     window.spotifyAuthUrl = 'set-url';
   </script>

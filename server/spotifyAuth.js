@@ -10,31 +10,17 @@ const spotifyApi = new SpotifyWebApi(spotifyCredentials);
 const authorizeUrl = spotifyApi.createAuthorizeURL(scopes, privateState);
 
 let expiration;
-const setExpiration = (expiresIn) => {
-  expiration = Date.now() + expiresIn * 1000;
+const calculateExpiration = (expiresIn) => {
+  return Date.now() + expiresIn * 1000;
 }
 
-const tempStuff = () => {
-  spotifyApi.getMe()
-    .then((data) => {
-      console.log('me', data);
-      return data;
-    })
-    .then((data) => {
-      return spotifyApi.getUserPlaylists(data.id);
-    })
-    .then((data) => {
-      console.log('playlists', data);
-    })
-}
-
-const setTokens = (code) => {
-  spotifyApi.authorizationCodeGrant(code)
-    .then((data) => {
-      setExpiration(data.body['expires_in']);
+const getTokens = (code) => {
+  return spotifyApi.authorizationCodeGrant(code)
+    .then((data) => {  // set in db
+      expiration = calculateExpiration(data.body['expires_in']);
       spotifyApi.setAccessToken(data.body['access_token']);
       spotifyApi.setRefreshToken(data.body['refresh_token']);
-      tempStuff();
+      return data.body['access_token'];
     }, (err) => {
       console.log('Something went wrong!', err);
     });
@@ -66,6 +52,6 @@ module.exports = {
   authorizeUrl,
   checkExpiration,
   privateState,
-  setTokens,
+  getTokens,
   spotifyApi,
 };

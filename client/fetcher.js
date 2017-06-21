@@ -36,11 +36,15 @@ const handleData = (response) => {
 };
 
 const rejectError = (response) => {
-  const error = Object.assign({}, {
-    status: response.status,
-    statusText: response.statusText,
-  });
-  return Promise.reject(error);
+  return handleData(response)
+    .then((data) => {
+      const error = Object.assign({}, {
+        data,
+        status: response.status,
+        statusText: response.statusText,
+      });
+      return Promise.reject(error);
+    });
 }
 
 const handleResponse = (response) => {
